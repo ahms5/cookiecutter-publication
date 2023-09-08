@@ -62,7 +62,7 @@ class CustomInstallCommand(install):
 
 setup(
     name='utils',
-    version='{{cookiecutter.version}}',
+    version='0.0.1',
     description='Package for utility functions and data path handling',
     author='{{cookiecutter.author}}',
     author_email='{{cookiecutter.email}}',
