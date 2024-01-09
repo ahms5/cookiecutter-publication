@@ -1,0 +1,12 @@
+[tool.ruff]
+src = ["{{cookiecutter.publication_slug}}"]
+ignore = ["N803", "N806", "N802"]
+line-length = 79
+select = ["B", "D", "E", "F", "ICN", "N", "Q", "W", "SIM", "I"]
+exclude = ["setup.py"]
+
+[tool.ruff.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.pydocstyle]
+convention = "numpy"

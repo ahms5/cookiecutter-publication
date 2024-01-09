@@ -2,16 +2,16 @@ name: {{cookiecutter.publication_slug}}
 channels:
   - defaults
 dependencies:
+  - python={{cookiecutter.python_version}}
   - pip
   - pyflakes
-  - python={{cookiecutter.python_version}}
-  - scons
-  - flake8
   - numpy
   - scipy
   - matplotlib
   - ipython
   - pip:
-    - "git+ssh://git@github.com/mberz/nbflow.git@b3b3729bf81d2ede6319ede5c118cdd52571dc8c#egg=nbflow"
+    - scons
+    - ruff
+    - git+https://github.com/mberz/nbflow.git@91bd2cf4912455bb789509034bde22ab7a4bbda1#egg=nbflow
     - -e ./utils/
 prefix: ./env/{{cookiecutter.publication_slug}}
