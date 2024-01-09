@@ -59,11 +59,11 @@ if __name__ == '__main__':
         if '{{ cookiecutter.manuscript }}' != 'Custom':
             if '{{ cookiecutter.manuscript }}' == 'JASA':
                 filename = os.path.join(PROJECT_DIRECTORY, 'manuscript', 'JASA.zip')
-                url = 'https://acousticalsociety.org/wp-content/uploads/2018/02/JASA-LaTeX-v2019.zip'
+                url = 'https://acousticalsociety.org/wp-content/uploads/2018/02/2021-05-v-JASA_LaTeXPackage_2.zip'
 
             elif '{{ cookiecutter.manuscript }}' == 'JASA-EL':
                 filename = os.path.join(PROJECT_DIRECTORY, 'manuscript', 'JASA-EL.zip')
-                url = 'https://acousticalsociety.org/wp-content/uploads/2018/02/JASA-EL-LaTeX-v2019.zip'
+                url = 'https://acousticalsociety.org/wp-content/uploads/2018/02/2021-05-v-JASA-EL_LaTeXPackage-1.zip'
 
             download_and_extract(url, filename)
             remove_file(os.path.join('manuscript', 'manuscript.tex'))
