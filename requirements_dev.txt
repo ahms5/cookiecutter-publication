@@ -1,8 +1,7 @@
-pytest<5.0.0
-tox==3.14.1
-cookiecutter>=1.4.0
-pytest-cookies==0.4.0
-alabaster==0.7.12
+pytest
+cookiecutter
+pytest-cookies
+alabaster
 watchdog
 scons
 git+https://github.com/mberz/nbflow.git@b3b3729bf81d2ede6319ede5c118cdd52571dc8c#egg=nbflow
