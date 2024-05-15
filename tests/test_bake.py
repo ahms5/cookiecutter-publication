@@ -1,7 +1,6 @@
 from contextlib import contextmanager
 import shlex
 import os
-import sys
 import subprocess
 import yaml
 import datetime
@@ -37,7 +36,7 @@ def bake_in_temp_dir(cookies, *args, **kwargs):
         yield result
     finally:
         pass
-        # rmtree(str(result.project))
+        # rmtree(str(result.project_path))
 
 
 def run_inside_dir(command, dirpath):
@@ -58,30 +57,32 @@ def check_output_inside_dir(command, dirpath):
 
 def test_year_compute_in_license_file(cookies):
     with bake_in_temp_dir(cookies) as result:
-        license_file_path = result.project.join('LICENSE')
+
+        license_file_path = open(os.path.join(
+            result.project_path, 'LICENSE'), 'r')
         now = datetime.datetime.now()
         assert str(now.year) in license_file_path.read()
 
 
 def test_manuscript(cookies):
     with bake_in_temp_dir(cookies) as result:
-        assert os.path.exists(result.project.join('manuscript'))
+        assert os.path.exists(os.path.join(result.project_path, 'manuscript'))
 
         run_inside_dir(
-            'pdflatex manuscript.tex', result.project.join('manuscript'))
+            'pdflatex manuscript.tex', os.path.join(result.project_path, 'manuscript'))
         assert os.path.exists(
-            result.project.join('manuscript').join('manuscript.pdf'))
+            os.path.join(result.project_path, 'manuscript', 'manuscript.pdf'))
 
 
 def test_wo_manuscript(cookies):
     extra = {"manuscript": "n"}
     with bake_in_temp_dir(cookies, extra_context=extra) as result:
-        assert os.path.exists(result.project.join('manuscript')) == False
+        assert os.path.exists(os.path.join(result.project_path, 'manuscript')) is False
 
 
 def test_conda_environ(cookies):
     with bake_in_temp_dir(cookies) as result:
-        fname = result.project.join('environment.yml')
+        fname = os.path.join(result.project_path, 'environment.yml')
         with open(fname, 'r') as stream:
             decoded = yaml.safe_load(stream)
             assert decoded['name'] == result.context['publication_slug']
@@ -96,4 +97,4 @@ def test_download_templates(cookies):
             extra_context=extra) as result:
 
         assert os.path.exists(
-            result.project.join('manuscript').join('JASA.zip'))
+            os.path.join(result.project_path, 'manuscript', 'JASA.zip'))
